@@ -71,7 +71,7 @@ class SinglyLinkedList:
             counter += 1
 
     def remove_at_loc(self, index):
-
+        """Method to remove element at specific index of Linked List"""
         if index < 0 or index > self.get_length():
             raise Exception("Invalid index")
 
