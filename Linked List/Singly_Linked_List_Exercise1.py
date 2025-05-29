@@ -42,9 +42,49 @@ class Singly_linked_list:
         for i in data:
             self.insert_at_end(data=i)
 
+    def insert_after_value(self, data_after, data_to_insert):
+
+        if self.head is None:
+            return
+
+        if self.head.data == data_after:
+            self.head.next = Node(data=data_to_insert, next=self.head.next)
+            return
+
+        itr = self.head
+
+        while itr:
+            if str(itr.data) == str(data_after):
+                itr.next = Node(data=data_to_insert, next=itr.next)
+                break
+            itr = itr.next
+
+    def remove_by_value(self, data):
+
+        if self.head is None:
+            return
+
+        if self.head.data == data:
+            self.head = self.head.next
+            return 
+
+        itr = self.head
+
+        while itr:
+            if str(itr.next.data) == str(data):
+                itr.next = itr.next.next
+                break
+            itr = itr.next
+
 
 if __name__ == '__main__':
     root = Singly_linked_list()
 
     root.insert_values(["banana","mango","grapes","orange"])
+    print(root.print_linked_list())
+
+    root.insert_after_value(data_after="mango",data_to_insert="apple")
+    print(root.print_linked_list())
+
+    root.remove_by_value(data="mango")
     print(root.print_linked_list())
