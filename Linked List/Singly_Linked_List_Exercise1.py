@@ -11,10 +11,9 @@ class Singly_linked_list:
         node = Node(data=data, next=self.head)
         self.head = node
 
-
     def insert_at_end(self, data):
 
-        if self.head == None:
+        if self.head is None:
             self.head = Node(data=data, next=None)
             return
 
@@ -66,7 +65,7 @@ class Singly_linked_list:
 
         if self.head.data == data:
             self.head = self.head.next
-            return 
+            return
 
         itr = self.head
 
