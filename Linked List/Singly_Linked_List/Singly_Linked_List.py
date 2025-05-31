@@ -40,6 +40,9 @@ class SinglyLinkedList:
 
     def insert_at_end(self, data):
         """Method to insert element at end of Linked List"""
+        if data is None:
+            return
+
         if self.head is None:
             self.head = Node(data=data, next=None)
             return
