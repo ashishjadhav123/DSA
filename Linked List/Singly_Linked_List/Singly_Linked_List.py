@@ -85,7 +85,7 @@ class SinglyLinkedList:
         itr = self.head
         counter = 0
         while itr:
-            if counter == index -1:
+            if counter == index - 1:
                 itr.next = itr.next.next
                 break
 
