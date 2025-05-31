@@ -28,6 +28,18 @@ class DoublyLinkedList:
             itr = itr.next
         return l_list_str
 
+    def get_length_linked_list(self):
+
+        itr = self.head
+        counter = 0
+
+        while itr:
+            counter += 1
+            itr = itr.next
+
+        return counter
+
+
     def insert_at_end(self, data):
 
         if self.head is None:
@@ -42,6 +54,25 @@ class DoublyLinkedList:
         itr.next = DNode(data=data, prv=itr)
 
 
+    def insert_at_loc(self, index, data):
+        if index < 0 or index > self.get_length_linked_list():
+            raise Exception("Enter valid Index")
+
+        if index == 0:
+            self.insert_at_beginning(data=data)
+            return
+
+        itr = self.head
+        counter = 0
+
+        while itr:
+            if counter == (index - 1):
+                itr.next = DNode(data=data, next=itr.next)
+                break
+            counter += 1
+            itr = itr.next
+
+
 if __name__ == '__main__':
     root = DoublyLinkedList()
 
@@ -49,8 +80,16 @@ if __name__ == '__main__':
     root.insert_at_beginning(10)
 
     print(root.print_linked_list())
+    print(f"Length of our Linked List is {root.get_length_linked_list()}.")
 
     root.insert_at_end(15)
     root.insert_at_end(20)
 
     print(root.print_linked_list())
+    print(f"Length of our Linked List is {root.get_length_linked_list()}.")
+
+    root.insert_at_loc(index=2, data=35)
+    root.insert_at_loc(index=0, data=45)
+
+    print(root.print_linked_list())
+    print(f"Length of our Linked List is {root.get_length_linked_list()}.")
