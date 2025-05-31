@@ -53,7 +53,6 @@ class DoublyLinkedList:
 
         itr.next = DNode(data=data, prv=itr)
 
-
     def insert_at_loc(self, index, data):
         if index < 0 or index > self.get_length_linked_list():
             raise Exception("Enter valid Index")
@@ -71,6 +70,23 @@ class DoublyLinkedList:
                 break
             counter += 1
             itr = itr.next
+
+    def remove_by_index(self, index):
+        if index < 0 or index > self.get_length_linked_list():
+            raise Exception("Invalid Index")
+
+        if index == 0:
+            self.head = self.head.next
+
+        itr = self.head
+        counter = 0
+
+        while itr:
+            if counter == (index - 1):
+                itr.next = itr.next.next
+                break
+            itr = itr.next
+            counter += 1
 
 
 if __name__ == '__main__':
@@ -90,6 +106,12 @@ if __name__ == '__main__':
 
     root.insert_at_loc(index=2, data=35)
     root.insert_at_loc(index=0, data=45)
+
+    print(root.print_linked_list())
+    print(f"Length of our Linked List is {root.get_length_linked_list()}.")
+
+    root.remove_by_index(2)
+    root.remove_by_index(0)
 
     print(root.print_linked_list())
     print(f"Length of our Linked List is {root.get_length_linked_list()}.")
