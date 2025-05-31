@@ -92,6 +92,56 @@ class SinglyLinkedList:
             itr = itr.next
             counter += 1
 
+    def insert_before_value(self, vlu_chk, insert_val):
+        """Method to Insert value before element Linked List"""
+        if self.head is None:
+            self.insert_at_beginning(data=insert_val)
+            return
+
+        itr = self.head
+
+        while itr:
+            if itr.next.data == vlu_chk:
+                itr.data = insert_val
+                return
+
+            itr = itr.next
+
+    def remove_after_value(self, data):
+        """Method to Remove after element Linked List"""
+        if self.head is None:
+            return
+
+        if self.head.data == data:
+            self.head = self.head.next
+            return
+
+        itr = self.head
+
+        while itr:
+            if itr.next:
+                if itr.next.data == data:
+                    itr.next.next = itr.next.next.next
+                    break
+            itr = itr.next
+
+    def remove_before_value(self, data):
+        """Method to Remove before element Linked List"""
+        if self.head is None:
+            return
+
+        if self.head.data == data:
+            self.head = self.head.next
+            return
+
+        itr = self.head
+
+        while itr:
+            if itr.next.next.data == data:
+                itr.next = itr.next.next
+                break
+            itr = itr.next
+
 
 if __name__ == '__main__':
     root = SinglyLinkedList()
@@ -122,5 +172,17 @@ if __name__ == '__main__':
     print(f"Length of our Linked List is {root.get_length()}.")
 
     root.remove_at_loc(index=6)
+    root.print_l_list()
+    print(f"Length of our Linked List is {root.get_length()}.")
+
+    root.insert_before_value(vlu_chk=100, insert_val=200)
+    root.print_l_list()
+    print(f"Length of our Linked List is {root.get_length()}.")
+
+    root.remove_after_value(data=100)
+    root.print_l_list()
+    print(f"Length of our Linked List is {root.get_length()}.")
+
+    root.remove_before_value(data=200)
     root.print_l_list()
     print(f"Length of our Linked List is {root.get_length()}.")
