@@ -13,6 +13,10 @@ class DoublyLinkedList:
     def insert_at_beginning(self, data):
         """Method to insert element at beginning of Linked List"""
         node = DNode(data=data, next=self.head)
+
+        if self.head is not None:
+            self.head.prv = node
+
         self.head = node
 
     def print_linked_list(self):
@@ -44,7 +48,7 @@ class DoublyLinkedList:
     def insert_at_end(self, data):
         """Method to insert element at end of Linked List"""
         if self.head is None:
-            self.head = DNode(data=data, next=self.head)
+            self.head = DNode(data=data, next=self.head, prv=None)
             return
 
         itr = self.head
