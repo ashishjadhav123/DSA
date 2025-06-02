@@ -10,10 +10,17 @@ class DoublyLinkedList:
         self.head = None
 
     def insert_at_beginning(self, data):
+
         node = DNode(data=data, next=self.head)
+
+        if self.head is not None:
+            self.head.prev = node
+
         self.head = node
 
     def print_l_list(self):
+        if self.head is None:
+            return None, 0
 
         itr = self.head
         str_l_list = ''
@@ -23,9 +30,11 @@ class DoublyLinkedList:
             suffix = ''
             if itr.next:
                 suffix = ' ⇄ '
+            # suffix = ' ⇄ ' if itr.next else ''
             str_l_list += str(itr.data) + suffix
             itr = itr.next
             counter += 1
+
         return str_l_list, counter
 
     def insert_at_end(self, data):
@@ -38,7 +47,7 @@ class DoublyLinkedList:
         while itr.next:
             itr = itr.next
 
-        itr.next = DNode(data=data)
+        itr.next = DNode(data=data, prev=itr)
 
     def insert_at_loc(self, loc, data):
         if loc < 0 or loc > self.print_l_list()[1]:
@@ -53,7 +62,10 @@ class DoublyLinkedList:
 
         while itr:
             if counter == (loc - 1):
-                itr.next = DNode(data=data, next=itr.next)
+                d_node = DNode(data=data, next=itr.next, prev=itr)
+                if itr.next:
+                    itr.next.prev = d_node
+                itr.next = d_node
                 break
             counter += 1
             itr = itr.next
@@ -63,39 +75,70 @@ class DoublyLinkedList:
             raise Exception("Invalid Index")
 
         if loc == 0:
-            self.head = self.head.next
+            if self.head.next:
+                self.head = self.head.next
+                self.head.prev = None
+            else:
+                self.head = None
             return
 
         itr = self.head
         counter = 0
 
         while itr:
-            if counter == (loc - 1):
-                itr.next = itr.next.next
+            if counter == loc:
+                if itr.prev:
+                    itr.prev.next = itr.next
+                if itr.next:
+                    itr.next.prev = itr.prev
                 break
             counter += 1
             itr = itr.next
 
+    def reverse_l_list(self):
+        itr = self.head
+
+        while itr.next:
+            itr = itr.next
+
+        reverse_str_l_list = ''
+        while itr:
+            suffix = ' ⇄ ' if itr.prev else ''
+            reverse_str_l_list += str(itr.data) + suffix
+            itr = itr.prev
+
+        return reverse_str_l_list
+
 
 if __name__ == '__main__':
-    rooot = DoublyLinkedList()
+    root = DoublyLinkedList()
 
-    rooot.insert_at_beginning(5)
-    rooot.insert_at_beginning(10)
-    rooot.insert_at_beginning(15)
+    root.insert_at_beginning(5)
+    root.insert_at_beginning(10)
+    root.insert_at_beginning(15)
 
-    print(rooot.print_l_list()[0])
+    print(root.print_l_list()[0])
+    print(f"Length of our Linked List is {root.print_l_list()[1]}.")
+    print(root.reverse_l_list(), '\n')
 
-    rooot.insert_at_end(20)
-    rooot.insert_at_end(25)
+    root.insert_at_end(20)
+    root.insert_at_end(25)
 
-    print(rooot.print_l_list()[0])
+    print(root.print_l_list()[0])
+    print(f"Length of our Linked List is {root.print_l_list()[1]}.")
+    print(root.reverse_l_list(), '\n')
 
-    rooot.insert_at_loc(loc=2, data=30)
+    root.insert_at_loc(loc=2, data=30)
+    root.insert_at_loc(loc=6, data=35)
 
-    print(rooot.print_l_list()[0])
+    print(root.print_l_list()[0])
+    print(f"Length of our Linked List is {root.print_l_list()[1]}.")
+    print(root.reverse_l_list(), '\n')
 
-    rooot.remove_at_loc(0)
+    root.remove_at_loc(0)
+    root.remove_at_loc(3)
 
-    print(rooot.print_l_list()[0])
+    print(root.print_l_list()[0])
+    print(f"Length of our Linked List is {root.print_l_list()[1]}.")
+    print(root.reverse_l_list(), '\n')
 

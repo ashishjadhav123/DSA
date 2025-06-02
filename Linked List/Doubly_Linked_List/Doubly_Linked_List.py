@@ -67,17 +67,15 @@ class DoublyLinkedList:
             self.insert_at_beginning(data=data)
             return
 
-        if index == self.get_length_linked_list():
-            self.insert_at_end(data=data)
-            return
-
         itr = self.head
         counter = 0
 
         while itr:
             if counter == (index - 1):
-                itr.next = DNode(data=data, next=itr.next, prv=itr)
-                itr.next.next.prv = itr.next
+                d_node = DNode(data=data, next=itr.next, prv=itr)
+                if itr.next:
+                    itr.next.prev = d_node
+                itr.next = d_node
                 break
             counter += 1
             itr = itr.next
