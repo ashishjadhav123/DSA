@@ -19,7 +19,6 @@ class DoublyLinkedList:
 
         self.head = dnode
 
-
     def print_l_list(self):
         if self.head is None:
             return None, 0
@@ -125,7 +124,6 @@ class DoublyLinkedList:
         list2.head.prev = itr
 
         return list1
-
 
 
 if __name__ == '__main__':
