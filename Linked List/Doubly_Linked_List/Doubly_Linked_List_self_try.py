@@ -109,6 +109,26 @@ class DoublyLinkedList:
 
         return reverse_str_l_list
 
+    def merge_linked_list(self, list1, list2):
+
+        if list1.head is None:
+            list1.head = list2.head
+            return list1
+
+        if list2.head is None:
+            return list1
+
+        itr = list1.head
+
+        while itr.next:
+            itr = itr.next
+
+        itr.next = list2.head
+        list2.head.prev = itr
+
+        print(list1.print_l_list()[0])
+        return list1
+
 
 if __name__ == '__main__':
     root = DoublyLinkedList()
@@ -141,4 +161,17 @@ if __name__ == '__main__':
     print(root.print_l_list()[0])
     print(f"Length of our Linked List is {root.print_l_list()[1]}.")
     print(root.reverse_l_list(), '\n')
+
+    dll1 = DoublyLinkedList()
+    dll2 = DoublyLinkedList()
+
+    for val in [10, 20, 30]:
+        dll1.insert_at_end(val)
+
+    for val in [40, 50]:
+        dll2.insert_at_end(val)
+
+    root.merge_linked_list(list1=dll1, list2=dll2)
+
+
 
