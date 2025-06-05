@@ -25,6 +25,24 @@ class CircularDoublyLinkedList:
             self.head.prev = new_node
             self.head = new_node
 
+    def insert_at_end(self, data):
+        new_node = CDNode(data=data)
+        tail = self.head.prev
+        head = self.head
+
+        itr = self.head
+
+        while itr.next:
+            itr = itr.next
+
+            if itr == tail:
+                break
+
+        itr.next = new_node
+        new_node.prev = itr
+        new_node.next = head
+
+
     def print_l_list(self):
 
         itr = self.head
@@ -47,5 +65,9 @@ if __name__ == '__main__':
     root.insert_at_beginning(data=5)
     root.insert_at_beginning(data=10)
     root.insert_at_beginning(data=15)
+
+    print(root.print_l_list())
+
+    root.insert_at_end(data=20)
 
     print(root.print_l_list())
