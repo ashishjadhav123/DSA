@@ -134,3 +134,8 @@ if __name__ == '__main__':
 
     print(root.print_l_list()[0])
     print(f"Length of Circular Linked list : {root.print_l_list()[1]}")
+
+    root.insert_at_loc(loc=2, data=35)
+
+    print(root.print_l_list()[0])
+    print(f"Length of Circular Linked list : {root.print_l_list()[1]}")
