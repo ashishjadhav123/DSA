@@ -84,6 +84,26 @@ class CircularDoublyLinkedList:
             counter += 1
             itr = itr.next
 
+    def remove_at_loc(self, loc):
+
+        if loc == 0:
+            tail = self.head.prev
+            self.head = self.head.next
+            self.head.prev = tail
+            tail.next = self.head
+            return
+
+        itr = self.head
+        counter = 0
+
+        while itr:
+            if counter == (loc - 1):
+                itr.next = itr.next.next
+                itr.next.next.prev = itr
+                break
+            counter += 1
+            itr = itr.next
+
 
 if __name__ == '__main__':
     root = CircularDoublyLinkedList()
@@ -101,5 +121,9 @@ if __name__ == '__main__':
     root.insert_at_loc(loc=2, data=30)
     root.insert_at_loc(loc=5, data=35)
     root.insert_at_loc(loc=0, data=40)
+
+    print(root.print_l_list()[0])
+
+    root.remove_at_loc(loc=0)
 
     print(root.print_l_list()[0])
