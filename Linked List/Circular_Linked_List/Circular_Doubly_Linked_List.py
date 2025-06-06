@@ -22,8 +22,8 @@ class CircularDoublyLinkedList:
             new_node.prev = tail
 
             tail.next = new_node
-            self.head.prev = new_node
-            self.head = new_node
+            self.head.prev = new_node   # Here current self.head prev
+            self.head = new_node        # Here we assign new_node to self.head
 
     def insert_at_end(self, data):
         new_node = CDNode(data=data)
@@ -42,22 +42,48 @@ class CircularDoublyLinkedList:
         new_node.prev = itr
         new_node.next = head
 
-
     def print_l_list(self):
 
         itr = self.head
         stop_point = self.head
         str_l_list = ''
+        counter = 0
 
         while itr.next:
             suffix = ' ⇄ ' if itr.next else ''
             str_l_list += str(itr.data) + suffix
             itr = itr.next
+            counter += 1
 
             if itr == stop_point:
                 break
 
-        return str_l_list
+        return str_l_list,counter
+
+    def insert_at_loc(self, loc, data):
+        if loc < 0 or loc > (self.print_l_list()[1]):
+            raise Exception("Enter valid Loc")
+
+        if loc == 0:
+            self.insert_at_beginning(data=data)
+            return
+
+        new_node = CDNode(data=data)
+        itr = self.head
+        counter = 0
+
+        while itr:
+            if counter == (loc - 1):
+
+                new_node.prev = itr
+                new_node.next = itr.next
+
+                itr.next.prev = new_node
+                itr.next = new_node
+                break
+            counter += 1
+            itr = itr.next
+
 
 if __name__ == '__main__':
     root = CircularDoublyLinkedList()
@@ -66,8 +92,14 @@ if __name__ == '__main__':
     root.insert_at_beginning(data=10)
     root.insert_at_beginning(data=15)
 
-    print(root.print_l_list())
+    print(root.print_l_list()[0])
 
     root.insert_at_end(data=20)
 
-    print(root.print_l_list())
+    print(root.print_l_list()[0])
+
+    root.insert_at_loc(loc=2, data=30)
+    root.insert_at_loc(loc=5, data=35)
+    root.insert_at_loc(loc=0, data=40)
+
+    print(root.print_l_list()[0])
