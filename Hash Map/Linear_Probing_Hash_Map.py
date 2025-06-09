@@ -20,6 +20,18 @@ class HashMap:
                 raise Exception("HashMap is full")
         self.hash[idx] = (key, value)
 
+    def delete_val(self, key):
+        idx = self.get_hash(key=key)
+
+        while self.hash[idx] is not None:
+            if self.hash[idx][0] == key:
+                self.hash[idx] = [None]
+                return
+            else:
+                print(f"{key} is not present in HashMap")
+                return
+
+
     def print_hash_map(self):
         for i in range(self.size):
             print(i, " : ", self.hash[i])
@@ -39,6 +51,13 @@ if __name__ == "__main__":
     root.insert_value(key='key 9', value=45)
     root.insert_value(key='key 10', value=50)
     # root.insert_value(key='key 11', value=55)
+
+    root.print_hash_map()
+    print('\n')
+
+    root.delete_val(key='key 5')
+    root.delete_val(key='key 3')
+    root.delete_val(key='key 5')
 
     root.print_hash_map()
 
