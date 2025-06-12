@@ -23,3 +23,8 @@ git checkout branch  # Switch to another branch
 
 git merge branch     # Merge another branch into current
 
+# Big O cheatsheet URL
+
+https://www.bigocheatsheet.com/
+
+
