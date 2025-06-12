@@ -10,6 +10,10 @@ class Queue:
 
     def dqueue(self):
         if len(self.queue) > 0:
+            return self.queue.popleft()
+        return "Empty Queue"
+    def pop(self):
+        if len(self.queue) > 0:
             return self.queue.pop()
         return "Empty Queue"
 
@@ -42,3 +46,7 @@ if __name__ == "__main__":
     print(root.peek())
 
     print(root.size())
+
+    print(root.pop())
+
+    root.print_queue()
