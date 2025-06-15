@@ -7,6 +7,7 @@ class BinarySearchTree:
         self.right = None
 
     def insert_node(self, data):
+        """ Insert Node in Binary Tree"""
         if self.data == data:
             return
 
@@ -23,6 +24,7 @@ class BinarySearchTree:
                 self.right = BinarySearchTree(data=data)
 
     def in_order_traversal(self):
+        """ in_Order Traversal in Binary Tree"""
         elements = []
 
         # Insert Left nodes
@@ -39,9 +41,26 @@ class BinarySearchTree:
 
         return elements
 
+    def search(self, val):
+        """ Search value in Binary Tree"""
+        if self.data == val:
+            return True
+
+        if val < self.data:
+            if self.left:
+                return self.left.search(val=val)
+            else:
+                return False
+
+        if val > self.data:
+            if self.right:
+                return self.right.search(val=val)
+            else:
+                return False
+
 
 def build_tree(elements):
-
+    """ Method to create Binary Tree from a List """
     root = BinarySearchTree(data=elements[0])
 
     for i in range(1, len(elements)):
@@ -55,4 +74,7 @@ if __name__ == "__main__":
     tree = build_tree(elements=numbers)
 
     print(tree.in_order_traversal())
+
+    print(tree.search(val=8))
+    print(tree.search(val=26))
     pass
