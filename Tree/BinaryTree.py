@@ -58,6 +58,32 @@ class BinarySearchTree:
             else:
                 return False
 
+    def delete_node(self, val):
+        if val < self.data:
+            if self.left:
+                self.left = self.left.delete_node(val=val)
+        elif val > self.data:
+            if self.right:
+                self.right = self.right.delete_node(val=val)
+        else:
+            if self.left is None and self.right is None:
+                return None
+            if self.left is None:
+                return self.right
+            if self.right is None:
+                return self.left
+
+            min_val = self.right.find_min()
+            self.data = min_val
+            self.right = self.right.delete_node(val=min_val)
+
+        return self
+
+    def find_min(self):
+        if self.left is None:
+            return self.data
+        return self.left.find_min()
+
 
 def build_tree(elements):
     """ Method to create Binary Tree from a List """
@@ -73,8 +99,14 @@ if __name__ == "__main__":
     numbers = [10, 6, 12, 3, 15, 8, 17, 11]
     tree = build_tree(elements=numbers)
 
-    print(tree.in_order_traversal())
 
     print(tree.search(val=8))
     print(tree.search(val=26))
+
+    print(tree.in_order_traversal())
+
+    tree.delete_node(val=11)
+
+    print(tree.in_order_traversal())
+
     pass
