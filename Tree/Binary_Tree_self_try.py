@@ -52,6 +52,34 @@ class BinartTree:
             else:
                 return False
 
+    def delete_node(self, val):
+        if val < self.data:
+            if self.left:
+                self.left = self.left.delete_node(val=val)
+
+        elif val > self.data:
+            if self.right:
+                self.right = self.right.delte_node(val=val)
+
+        else:
+            if self.left is None and self.right is None:
+                return None
+            if self.left is None:
+                return self.right
+            if self.right is None:
+                return self.left
+
+            min_val = self.right.find_min()
+            self.data = min_val
+            self.right = self.right.delete_node(val=min_val)
+
+        return self
+
+    def find_min(self):
+        if self.left is None:
+            return self.data
+        return self.left.find_min()
+
 
 def build_tree(elements):
     root = BinartTree(elements[0])
@@ -71,3 +99,10 @@ if __name__ == "__main__":
 
     print(tree.search_node(val=9))
     print(tree.search_node(val=22))
+
+    print(tree.in_order_traversal())
+
+    tree.delete_node(val=5)
+    tree.delete_node(val=10)
+
+    print(tree.in_order_traversal())
