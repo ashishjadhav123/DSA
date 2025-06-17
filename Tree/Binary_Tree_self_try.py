@@ -36,6 +36,22 @@ class BinartTree:
 
         return elements
 
+    def search_node(self, val):
+        if self.data == val:
+            return True
+
+        if val < self.data:
+            if self.left:
+                return self.left.search_node(val=val)
+            else:
+                return False
+
+        if val > self.data:
+            if self.right:
+                return self.right.search_node(val=val)
+            else:
+                return False
+
 
 def build_tree(elements):
     root = BinartTree(elements[0])
@@ -52,3 +68,6 @@ if __name__ == "__main__":
     tree = build_tree(elements=numbers)
 
     print(tree.in_order_traversal())
+
+    print(tree.search_node(val=9))
+    print(tree.search_node(val=22))
