@@ -25,6 +25,6 @@ git merge branch     # Merge another branch into current
 
 # Big O cheatsheet URL
 
-https://www.bigocheatsheet.com
+https://www.bigocheatsheet.com/
 
 
